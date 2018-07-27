@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.9)
+project( opencv_test )
+find_package( OpenCV REQUIRED )
+MESSAGE("OpenCv version:${OpenCV_VERSION}")
+include_directories(${OpenCV_INCLUDE_DIRS})
+SET(SRC src/test.cpp)
+add_executable( main ${SRC} )
+target_link_libraries( main ${OpenCV_LIBS} )
