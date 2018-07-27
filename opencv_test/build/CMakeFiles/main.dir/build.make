@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mxq/OpenCvProject/opencv_test
+CMAKE_SOURCE_DIR = /home/mxq/Code/OpenCVLinux/opencv_test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mxq/OpenCvProject/opencv_test/build
+CMAKE_BINARY_DIR = /home/mxq/Code/OpenCVLinux/opencv_test/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/main.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/main.dir/flags.make
 
 CMakeFiles/main.dir/src/test.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/test.cpp.o: ../src/test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mxq/OpenCvProject/opencv_test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/src/test.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/test.cpp.o -c /home/mxq/OpenCvProject/opencv_test/src/test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mxq/Code/OpenCVLinux/opencv_test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/src/test.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/test.cpp.o -c /home/mxq/Code/OpenCVLinux/opencv_test/src/test.cpp
 
 CMakeFiles/main.dir/src/test.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/test.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mxq/OpenCvProject/opencv_test/src/test.cpp > CMakeFiles/main.dir/src/test.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mxq/Code/OpenCVLinux/opencv_test/src/test.cpp > CMakeFiles/main.dir/src/test.cpp.i
 
 CMakeFiles/main.dir/src/test.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/test.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mxq/OpenCvProject/opencv_test/src/test.cpp -o CMakeFiles/main.dir/src/test.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mxq/Code/OpenCVLinux/opencv_test/src/test.cpp -o CMakeFiles/main.dir/src/test.cpp.s
 
 CMakeFiles/main.dir/src/test.cpp.o.requires:
 
@@ -90,25 +90,26 @@ main_EXTERNAL_OBJECTS =
 
 main: CMakeFiles/main.dir/src/test.cpp.o
 main: CMakeFiles/main.dir/build.make
-main: /usr/local/lib/libopencv_dnn.so.3.4.2
-main: /usr/local/lib/libopencv_ml.so.3.4.2
-main: /usr/local/lib/libopencv_objdetect.so.3.4.2
-main: /usr/local/lib/libopencv_shape.so.3.4.2
-main: /usr/local/lib/libopencv_stitching.so.3.4.2
-main: /usr/local/lib/libopencv_superres.so.3.4.2
-main: /usr/local/lib/libopencv_videostab.so.3.4.2
-main: /usr/local/lib/libopencv_calib3d.so.3.4.2
-main: /usr/local/lib/libopencv_features2d.so.3.4.2
-main: /usr/local/lib/libopencv_flann.so.3.4.2
-main: /usr/local/lib/libopencv_highgui.so.3.4.2
-main: /usr/local/lib/libopencv_photo.so.3.4.2
-main: /usr/local/lib/libopencv_video.so.3.4.2
-main: /usr/local/lib/libopencv_videoio.so.3.4.2
-main: /usr/local/lib/libopencv_imgcodecs.so.3.4.2
-main: /usr/local/lib/libopencv_imgproc.so.3.4.2
-main: /usr/local/lib/libopencv_core.so.3.4.2
+main: /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_ts.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_superres.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_ocl.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_gpu.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_contrib.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_legacy.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_video.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_ml.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_flann.so.2.4.9
+main: /usr/lib/x86_64-linux-gnu/libopencv_core.so.2.4.9
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mxq/OpenCvProject/opencv_test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mxq/Code/OpenCVLinux/opencv_test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -125,6 +126,6 @@ CMakeFiles/main.dir/clean:
 .PHONY : CMakeFiles/main.dir/clean
 
 CMakeFiles/main.dir/depend:
-	cd /home/mxq/OpenCvProject/opencv_test/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mxq/OpenCvProject/opencv_test /home/mxq/OpenCvProject/opencv_test /home/mxq/OpenCvProject/opencv_test/build /home/mxq/OpenCvProject/opencv_test/build /home/mxq/OpenCvProject/opencv_test/build/CMakeFiles/main.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/mxq/Code/OpenCVLinux/opencv_test/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mxq/Code/OpenCVLinux/opencv_test /home/mxq/Code/OpenCVLinux/opencv_test /home/mxq/Code/OpenCVLinux/opencv_test/build /home/mxq/Code/OpenCVLinux/opencv_test/build /home/mxq/Code/OpenCVLinux/opencv_test/build/CMakeFiles/main.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/main.dir/depend
 
