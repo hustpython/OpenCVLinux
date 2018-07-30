@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 2.6)
+PROJECT(SVM)
+set(PROJECT_VERSION "0.1")
+find_package(OpenCV REQUIRED)
+set(src src/main.cpp)
+ADD_EXECUTABLE( ${PROJECT_NAME} ${src} )
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME}  ${OpenCV_LIBS} )
+SET( EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
