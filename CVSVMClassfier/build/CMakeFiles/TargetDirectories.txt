@@ -1,3 +1,0 @@
-/home/mxq/Codes/OpenCVLinux/CVSVMClassfier/build/CMakeFiles/rebuild_cache.dir
-/home/mxq/Codes/OpenCVLinux/CVSVMClassfier/build/CMakeFiles/SVM.dir
-/home/mxq/Codes/OpenCVLinux/CVSVMClassfier/build/CMakeFiles/edit_cache.dir
