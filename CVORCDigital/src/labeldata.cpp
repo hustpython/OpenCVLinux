@@ -26,10 +26,11 @@ int main(int argc,char ** argv)
         //reshape(m,n),m表示转换后的通道数,若是0表示通道数不变,n:表示转换后的行数.
         //本代码中就是将 10 * 10 的像素矩阵转化为通道数为1,行数为1(列为100)的一维矩阵
         sample.push_back(tmp2.reshape(1,1));
+        std::cout<<sample<<std::endl;
         imshow("src",src);
         int c = waitKey(0);
         c -= 0x30;
-        if(c == 27)
+        if(c == -21)
         {
             return 1;
         }

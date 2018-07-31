@@ -1,0 +1,4 @@
+/home/mxq/Code/OpenCVLinux/CVORCDigital/build/CMakeFiles/edit_cache.dir
+/home/mxq/Code/OpenCVLinux/CVORCDigital/build/CMakeFiles/rebuild_cache.dir
+/home/mxq/Code/OpenCVLinux/CVORCDigital/build/CMakeFiles/TrainData.dir
+/home/mxq/Code/OpenCVLinux/CVORCDigital/build/CMakeFiles/TestData.dir

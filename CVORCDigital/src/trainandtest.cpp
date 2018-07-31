@@ -1,9 +1,9 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include <opencv2/ml.hpp>
-
+//#include <opencv2/ml.hpp> opencv3.4.
+#include <opencv/ml.h>
 using namespace cv;
-using namespace cv::ml;
+//using namespace cv::ml; opencv3.4.
 
 int main(int argc,char ** argv)
 {
@@ -22,14 +22,23 @@ int main(int argc,char ** argv)
     Label["label"] >> response;
     Label.release();
 
-    Ptr<KNearest> knn = KNearest::create();
-    knn->train(sample,ROW_SAMPLE,response);
+    //Ptr<KNearest> knn = KNearest::create(); opencv3.4.
+    //knn->train(sample,ROW_SAMPLE,response); opencv3.4.
+
+    KNearest knn;
+    knn.train(sample,response);
+
     std::cout<<"Training completed ......!!!"<<std::endl;
     std::vector<std::vector <Point> >contours;
     std::vector < Vec4i> hierarchy;
     findContours(con,contours,hierarchy,CV_RETR_CCOMP,CV_CHAIN_APPROX_SIMPLE);
     Mat dst(src.rows,src.cols,CV_8UC3,Scalar::all(0));
 
+    Mat contourdst = dst.clone();
+    cv::drawContours(contourdst, contours, -1, cv::Scalar::all(255));
+    cv::imshow("Contours", contourdst);
+	cv::waitKey(0);
+    
     for (int i = 0; i < contours.size(); i = hierarchy[i][0])
     {
         Rect r= boundingRect(contours[i]);
@@ -38,9 +47,12 @@ int main(int argc,char ** argv)
         resize(ROI,tmp1, Size(10,10), 0,0,INTER_LINEAR );
         tmp1.convertTo(tmp2,CV_32FC1);
         Mat results;
-        knn->findNearest(tmp2.reshape(1,1), 1,results);
+        //knn->findNearest(tmp2.reshape(1,1), 1,results); opencv3.4.
+
+        float p=knn.find_nearest(tmp2.reshape(1,1), 1);
         char name[4];
-        sprintf(name,"%d",int((results.at<float>(0,0))));
+        sprintf(name,"%d",(int)p);
+        //sprintf(name,"%d",int((results.at<float>(0,0)))); opencv3.4.
         putText( dst,name,Point(r.x,r.y+r.height) ,0,1, Scalar(0, 255, 0), 2, 8 );
 }
 
