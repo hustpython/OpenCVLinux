@@ -23,10 +23,11 @@ int main(int argc,char ** argv)
         resize(ROI,tmp1,Size(10,10),0,0,INTER_LINEAR);
         tmp1.convertTo(tmp2,CV_32FC1);
         sample.push_back(tmp2.reshape(1,1));
+        std::cout<<sample<<std::endl;
         imshow("src",src);
         int c = waitKey(0);
         c -= 0x30;
-        if(c == 27)
+        if(c == -21)
         {
             return 1;
         }

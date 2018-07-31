@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mxq/Code/OpenCVLinux/CVORCDigital/src/trainandtest.cpp
+opencv2/opencv.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+opencv/ml.h
+-
+
