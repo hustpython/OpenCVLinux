@@ -60,14 +60,22 @@ KNN::KNN(int k,char *datapath)
 		for(int j=0;j<colLen;j++)
 		{
 			fin>>dataSet[i][j];
+            // dataSet = {
+            //            {0.0,1.1},\
+            //            {1.10,1.0},\
+            //             ... 
+            //             ...
+            //            };
 		}
 		fin>>labels[i];
+        //label = {A,A,B,...};
 	}
  
 	cout<<"please input the test data :"<<endl;
 	/* inuput the test data */
 	for(int i=0;i<colLen;i++)
 		cin>>testData[i];
+    //testData = {0.5,0.5};
 
 }
 double KNN::get_distance(tData *d1,tData *d2)
@@ -89,33 +97,51 @@ void KNN::get_all_distance()
         //<key,value> => <i,distance>
         map_index_dis[i] = distance;
     }
+    //0->distance0;1->distance1；...;11->distance11
     map<int,double>::const_iterator it=map_index_dis.begin();
     while(it != map_index_dis.end())
     {
-        cout << "index = " << it->first << "distance = "<<it->second<<endl;
+        cout << "index = " << it->first<<" "<< "distance = "<<it->second<<endl;
         it++;
     }
+    // index = 0distance = 0.781025
+    // index = 1distance = 0.707107
+    // index = 2distance = 1.58114
+    // index = 3distance = 0
+    // ...
 }
 void KNN::get_max_freq_label()
 {
+    //map转化为vector目的是为了使用sort函数
     vector<PAIR>vec_index_dis(map_index_dis.begin(),map_index_dis.end());
     sort(vec_index_dis.begin(),vec_index_dis.end(),CmpByValue());
+    // 根据distance从小到大排序
+    //  the index = 3 the distance = 0 
+    // the index = 1 the distance = 0.707107 
+    // the index = 5 the distance = 0.707107 
+    // the index = 6 the distance = 0.707107 
+    // the index = 0 the distance = 0.781025
     for(int i=0;i<k;i++)
     {
+        //选取排序后前k个,根据index,labels[index]找到对应的label
 		cout<<"the index = "<<vec_index_dis[i].first<<" the distance = " \
         <<vec_index_dis[i].second<<" the label = "                       \
         <<labels[vec_index_dis[i].first]                                 \
         <<" the coordinate ( "<<dataSet[ vec_index_dis[i].first ][0]     \
         <<","<<dataSet[ vec_index_dis[i].first ][1]<<" )"<<endl;
         map_label_freq[labels[vec_index_dis[i].first]]++;
+        // A-> ++
     }
+    
     map<tLabel,int>::const_iterator map_it = map_label_freq.begin();
     tLabel label;
     int max_freq = 0;
     while (map_it != map_label_freq.end())
     {
+        //这个循环的次数不超过标签的类数
         if(map_it->second > max_freq)
         {
+            cout << map_it->first<<"的票数为:"<<map_it->second<<endl;
             max_freq = map_it->second;
             label = map_it->first;
         }
