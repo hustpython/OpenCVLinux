@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mxq/Code/OpenCVLinux/CVORCDigital
+CMAKE_SOURCE_DIR = /home/mxq/Codes/OpenCVLinux/CVORCDigital
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mxq/Code/OpenCVLinux/CVORCDigital/build
+CMAKE_BINARY_DIR = /home/mxq/Codes/OpenCVLinux/CVORCDigital/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/TestData.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/TestData.dir/flags.make
 
 CMakeFiles/TestData.dir/src/trainandtest.cpp.o: CMakeFiles/TestData.dir/flags.make
 CMakeFiles/TestData.dir/src/trainandtest.cpp.o: ../src/trainandtest.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mxq/Code/OpenCVLinux/CVORCDigital/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TestData.dir/src/trainandtest.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TestData.dir/src/trainandtest.cpp.o -c /home/mxq/Code/OpenCVLinux/CVORCDigital/src/trainandtest.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mxq/Codes/OpenCVLinux/CVORCDigital/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TestData.dir/src/trainandtest.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TestData.dir/src/trainandtest.cpp.o -c /home/mxq/Codes/OpenCVLinux/CVORCDigital/src/trainandtest.cpp
 
 CMakeFiles/TestData.dir/src/trainandtest.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TestData.dir/src/trainandtest.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mxq/Code/OpenCVLinux/CVORCDigital/src/trainandtest.cpp > CMakeFiles/TestData.dir/src/trainandtest.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mxq/Codes/OpenCVLinux/CVORCDigital/src/trainandtest.cpp > CMakeFiles/TestData.dir/src/trainandtest.cpp.i
 
 CMakeFiles/TestData.dir/src/trainandtest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TestData.dir/src/trainandtest.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mxq/Code/OpenCVLinux/CVORCDigital/src/trainandtest.cpp -o CMakeFiles/TestData.dir/src/trainandtest.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mxq/Codes/OpenCVLinux/CVORCDigital/src/trainandtest.cpp -o CMakeFiles/TestData.dir/src/trainandtest.cpp.s
 
 CMakeFiles/TestData.dir/src/trainandtest.cpp.o.requires:
 
@@ -90,26 +90,25 @@ TestData_EXTERNAL_OBJECTS =
 
 ../bin/TestData: CMakeFiles/TestData.dir/src/trainandtest.cpp.o
 ../bin/TestData: CMakeFiles/TestData.dir/build.make
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_ts.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_superres.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_ocl.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_gpu.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_contrib.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_legacy.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_video.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_ml.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_flann.so.2.4.9
-../bin/TestData: /usr/lib/x86_64-linux-gnu/libopencv_core.so.2.4.9
+../bin/TestData: /usr/local/lib/libopencv_dnn.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_ml.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_objdetect.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_shape.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_stitching.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_superres.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_videostab.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_calib3d.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_features2d.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_flann.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_highgui.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_photo.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_video.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_videoio.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_imgcodecs.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_imgproc.so.3.4.2
+../bin/TestData: /usr/local/lib/libopencv_core.so.3.4.2
 ../bin/TestData: CMakeFiles/TestData.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mxq/Code/OpenCVLinux/CVORCDigital/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/TestData"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mxq/Codes/OpenCVLinux/CVORCDigital/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/TestData"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TestData.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -126,6 +125,6 @@ CMakeFiles/TestData.dir/clean:
 .PHONY : CMakeFiles/TestData.dir/clean
 
 CMakeFiles/TestData.dir/depend:
-	cd /home/mxq/Code/OpenCVLinux/CVORCDigital/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mxq/Code/OpenCVLinux/CVORCDigital /home/mxq/Code/OpenCVLinux/CVORCDigital /home/mxq/Code/OpenCVLinux/CVORCDigital/build /home/mxq/Code/OpenCVLinux/CVORCDigital/build /home/mxq/Code/OpenCVLinux/CVORCDigital/build/CMakeFiles/TestData.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/mxq/Codes/OpenCVLinux/CVORCDigital/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mxq/Codes/OpenCVLinux/CVORCDigital /home/mxq/Codes/OpenCVLinux/CVORCDigital /home/mxq/Codes/OpenCVLinux/CVORCDigital/build /home/mxq/Codes/OpenCVLinux/CVORCDigital/build /home/mxq/Codes/OpenCVLinux/CVORCDigital/build/CMakeFiles/TestData.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/TestData.dir/depend
 

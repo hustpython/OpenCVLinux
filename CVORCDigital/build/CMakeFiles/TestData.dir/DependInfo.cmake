@@ -4,13 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/mxq/Code/OpenCVLinux/CVORCDigital/src/trainandtest.cpp" "/home/mxq/Code/OpenCVLinux/CVORCDigital/build/CMakeFiles/TestData.dir/src/trainandtest.cpp.o"
+  "/home/mxq/Codes/OpenCVLinux/CVORCDigital/src/trainandtest.cpp" "/home/mxq/Codes/OpenCVLinux/CVORCDigital/build/CMakeFiles/TestData.dir/src/trainandtest.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/usr/include/opencv"
+  "/usr/local/include"
+  "/usr/local/include/opencv"
   )
 
 # Targets to which this target links.

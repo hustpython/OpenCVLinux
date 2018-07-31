@@ -1,10 +1,8 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
-//#include <opencv2/ml.hpp> opencv3.4.
-#include <opencv/ml.h>
+#include <opencv2/ml.hpp> 
 using namespace cv;
-//using namespace cv::ml; opencv3.4.
-
+using namespace cv::ml; 
 int main(int argc,char ** argv)
 {
     Mat thr,gray,con;
@@ -22,11 +20,8 @@ int main(int argc,char ** argv)
     Label["label"] >> response;
     Label.release();
 
-    //Ptr<KNearest> knn = KNearest::create(); opencv3.4.
-    //knn->train(sample,ROW_SAMPLE,response); opencv3.4.
-
-    KNearest knn;
-    knn.train(sample,response);
+    Ptr<KNearest> knn = KNearest::create(); 
+    knn->train(sample,ROW_SAMPLE,response); 
 
     std::cout<<"Training completed ......!!!"<<std::endl;
     std::vector<std::vector <Point> >contours;
@@ -47,12 +42,9 @@ int main(int argc,char ** argv)
         resize(ROI,tmp1, Size(10,10), 0,0,INTER_LINEAR );
         tmp1.convertTo(tmp2,CV_32FC1);
         Mat results;
-        //knn->findNearest(tmp2.reshape(1,1), 1,results); opencv3.4.
-
-        float p=knn.find_nearest(tmp2.reshape(1,1), 1);
+        knn->findNearest(tmp2.reshape(1,1), 1,results); 
         char name[4];
-        sprintf(name,"%d",(int)p);
-        //sprintf(name,"%d",int((results.at<float>(0,0)))); opencv3.4.
+        sprintf(name,"%d",int((results.at<float>(0,0)))); 
         putText( dst,name,Point(r.x,r.y+r.height) ,0,1, Scalar(0, 255, 0), 2, 8 );
 }
 
