@@ -1,3 +1,5 @@
+## 主题
+C++ 实现 Knn 的简单分类和预测
 ## Exmaple 1
 A , B 分类
 ./classfiAB ../resource/data/classfidata.txt
