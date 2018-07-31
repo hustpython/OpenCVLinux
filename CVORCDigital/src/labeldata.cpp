@@ -22,6 +22,9 @@ int main(int argc,char ** argv)
         Mat tmp1,tmp2;
         resize(ROI,tmp1,Size(10,10),0,0,INTER_LINEAR);
         tmp1.convertTo(tmp2,CV_32FC1);
+        //reshape 将原Mat矩阵进行转换 
+        //reshape(m,n),m表示转换后的通道数,若是0表示通道数不变,n:表示转换后的行数.
+        //本代码中就是将 10 * 10 的像素矩阵转化为通道数为1,行数为1(列为100)的一维矩阵
         sample.push_back(tmp2.reshape(1,1));
         imshow("src",src);
         int c = waitKey(0);
