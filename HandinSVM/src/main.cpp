@@ -99,7 +99,8 @@ int main(int argc,char **argv)
             d[i*fn+j] = data[i*fn+j];
         }
     }
-    SVM svm(d, l, sn1+sn2, fn);   
+    SVM svm(d, l, sn1+sn2, fn); 
+    cout << "正在计算请稍等..."<<endl;  
     svm.SMO();
     cout << "数据集1和数据集2"<<endl;  
     svm.show();  

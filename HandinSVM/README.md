@@ -7,6 +7,9 @@ wine_data
 ## 输出
 alpha
 ## 使用
+
+- 编译
+
 mkdir build
 
 cd build
@@ -14,3 +17,7 @@ cd build
 cmake ..
 
 make
+
+- 运行
+
+./SVM ../resource/wine.mat
