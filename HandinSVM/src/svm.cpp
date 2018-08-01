@@ -1,114 +1,144 @@
-#include "svm.h"
-#include <cmath>
-using namespace std;
-
-#define eps 1e-2 //误差精度
-const int C = 100;
-
-SVM::~SVM()
-{
-    if(data) delete []data;
-    if(label) delete []label;
-    if(alpha) delete alpha;
-    if(gx) delete gx;
-}
-//构造函数
-//d为样本,每个样本按照行存储;l标签(1或-1);sn样本个数;fn特征个数
-SVM::SVM(double *d,double *l,int sn,int fn)
-{
-    this->sampleNum = sn;
-    this->featureNum = fn;
-    this->label = new double[sampleNum];
-    int i,j;
-    for( i=0;i<sampleNum;i++)
-    {
-        this->label[i] = l[i];
-    }
-    for( i=0;i<sampleNum;i++)
-    {
-        this->data[i] = new double[featureNum];
-        for( j=0;j<featureNum;j++)
-        {
-            data[i][j] = d[i*featureNum+j];
-        }
-    }
-    alpha = new double[sampleNum] {0};
-    gx = new double[sampleNum] {0};
-}
-double SVM::s_max(double a,double b)
-{
-    return a>b?a:b;
-}
-double SVM::s_min(double a,double b)
-{
-    return a<b?a:b;
-}
-double SVM::objFun(int x)
-{
-    int i,j;
-    //选择一个 0 < alpha[j] << C;
-    for(i=0;i<sampleNum;i++)
-    {
-        if(alpha[i]>0 && alpha[i]<C)
-        {
-            j = i;
-            break;
-        }
-    }
-    //计算b
-    double b = label[j];
-    for(i=0;i<sampleNum;i++)
-    {
-        b -= alpha[i] * label[i] *kernel(i,j);
-    }
-    //构造决策树;
-    double objf = b;
-    for(i=0;i<sampleNum;i++)
-    {
-        objf += alpha[i]*label[i]*kernel(x,i);
-    }
-    return objf;
-}
-//内积核
-double SVM::kernel(int i,int j)
-{
-    double res = 0;
-    for(int k=0;k<featureNum;k++)
-    {
-        res += data[i][k] *data[j][k];
-    }
-    return res;
-}
-
-//计算g(xi),也就是对样本i的预测值
-void SVM::computeGx()
-{
-    int i,j;
-    for(i=0;j<sampleNum;i++)
-    {
-        gx[i] = 0;
-        for(j=0;j<sampleNum;j++)
-        {
-            gx[i] += alpha[j]*label[i]*kernel(i,j);
-        }
-        gx[i] += b;
-    }
-}
-//更新
-void SVM::update(int a1,int a2,double x1,double x2)
-{
-    double b1_new = -(gx[a1] - label[a1]) - 
-                     label[a1]*kernel(a1,a1)*(alpha[a1]-x1)
-                     - label[a2] * kernel(a2,a1)*(alpha[a2]-x2) +b;
-    double b2_new = -(gx[a2]-label[a2]) - label[a1] * 
-                    kernel(a1,a2)*(alpha[a1]-x1)
-                    - label[a2]*kernel(a2,a2)*(alpha[a2]-x2)+b;
-    if(fabs(alpha[a1])<eps || fabs(alpha[a1]-C)<eps || fabs(alpha[a2]-C)<eps)
-    {
-        b = (b1_new + b2_new) /2;
-    }
-    else b=b1_new;
-
+#include "svm.h"  
+#include <math.h>  
+using namespace std;  
+  
+#define eps 1e-2    //误差精度  
+const int C = 100;  //惩罚参数  
+  
+SVM::~SVM()  
+{  
+    if (data) delete[]data;  
+    if (label) delete []label;  
+    if (alpha) delete alpha;  
+    if (gx) delete gx;  
+}  
+  
+//d中为样本,每个样本按行存储; l标签(1或-1); sn样本个数; fn特征个数  
+SVM::SVM(double *d, double *l, int sn, int fn)  
+{  
+    this->sampleNum = sn;  
+    this->featureNum = fn;  
+    this->label = new double[sampleNum];  
+    this->data = new double*[sampleNum];  
+    for (int i = 0; i < sampleNum; i++)  
+    {  
+        this->label[i] = l[i];  
+    }  
+    for (int i = 0; i < sampleNum; i++)  
+    {  
+        this->data[i] = new double[featureNum];  
+        for (int j = 0; j < featureNum; j++)  
+        {  
+            data[i][j] = d[i*featureNum + j];  
+        }  
+    }  
+    alpha = new double[sampleNum] {0};  
+    gx = new double[sampleNum] {0};  
+  
+}  
+  
+double SVM::s_max(double a, double b)  
+{  
+    return a > b ? a : b;  
+}  
+  
+double SVM::s_min(double a, double b)  
+{  
+    return a < b ? a : b;  
+}  
+  
+double SVM::objFun(int x)  
+{  
+    int j = 0;   
+    //选择一个0 < alpha[j] < C  
+    for (int i = 0; i < sampleNum; i++)  
+    {  
+        if (alpha[i]>0 && alpha[i] < C)  
+        {  
+            j = i;  
+            break;  
+        }  
+    }  
+    //计算b  
+    double b = label[j];  
+    for (int i = 0; i < sampleNum; i++)  
+    {  
+        b -= alpha[i] * label[i] * kernel(i, j);  
+    }  
+    //构造决策函数  
+    double objf = b;  
+    for (int i = 0; i < sampleNum; i++)  
+    {  
+        objf += alpha[i] * label[i] * kernel(x, i);  
+    }  
+    return objf;  
+}  
+  
+//判断有无收敛  
+bool SVM::isConvergence()  
+{  
+    //alpah[i] * y[i]求和等于0  
+    //0 <= alpha[i] <= C  
+    //y[i] * gx[i]满足一定条件  
+    double sum = 0;  
+    for (int i = 0; i < sampleNum; i++)  
+    {  
+        if (alpha[i] < -eps || alpha[i] > C + eps) return false;  
+        else  
+        {  
+            // alpha[i] = 0  
+            if (fabs(alpha[i]) < eps && label[i] * gx[i] < 1 - eps) return false;  
+            // 0 < alpha[i] < C  
+            if (alpha[i] > -eps && alpha[i] < C + eps && fabs(label[i] * gx[i] - 1)>eps) return false;  
+            // alpha[i] = C  
+            if (fabs(alpha[i] - C) < eps && label[i] * gx[i] > 1 + eps) return false;  
+        }  
+        sum += alpha[i] * label[i];  
+    }  
+    if (fabs(sum) > eps) return false;  
+      
+    return true;  
+}  
+  
+//假装是个核函数  
+//两个向量做内积  
+double SVM::kernel(int i, int j)  
+{  
+    double res = 0;  
+    for (int k = 0; k < featureNum; k++)  
+    {  
+        res += data[i][k] * data[j][k];  
+    }  
+    return res;  
+}  
+  
+//计算g(xi),也就是对样本i的预测值  
+void SVM::computeGx()  
+{  
+    for (int i = 0; i < sampleNum; i++)  
+    {  
+        gx[i] = 0;  
+        for(int j=0; j < sampleNum; j++)  
+        {  
+            gx[i] += alpha[j] * label[j] * kernel(i, j);  
+        }  
+        gx[i] += b;  
+    }  
+}  
+  
+//更新很多东西  
+void SVM::update(int a1, int a2, double x1, double x2)  
+{  
+    //更新阈值b  
+      
+    double b1_new = -(gx[a1] - label[a1]) - label[a1] * kernel(a1, a1)*(alpha[a1] - x1)  
+        - label[a2] * kernel(a2, a1)*(alpha[a2] - x2) + b;  
+    double b2_new = -(gx[a2] - label[a2]) - label[a1] * kernel(a1, a2)*(alpha[a1] - x1)  
+        - label[a2] * kernel(a2, a2)*(alpha[a2] - x2) + b;  
+    if (fabs(alpha[a1]) < eps || fabs(alpha[a1] - C) < eps || fabs(alpha[a2]) < eps || fabs(alpha[a2] - C) < eps)  
+        b = (b1_new + b2_new) / 2;  
+    else   
+        b = b1_new;   
     /* 
     int j = 0; 
     //选择一个0 < alpha[j] < C 
@@ -128,65 +158,71 @@ void SVM::update(int a1,int a2,double x1,double x2)
     } 
     */  
     //更新gx  
-    computeGx(); 
-}
-int SVM::secondAlpha(int a1)
-{
-    bool pos = (gx[a1] - label[a1] >0);
-    double tmp = pos ? 100000000 : -100000000;
-    double ei = 0;
-    int a2 = -1;
-    for(int i =0;i<sampleNum;i++)
-    {
-        ei = gx[i] - label[i];
-        if(pos && ei < tmp || !pos && ei >tmp)
-        {
-            tmp = ei;
-            a2 = i;
-        }
-    }
-    //对于特殊情况,直接遍历间隔边界上的支持向量点,选择具有最大下降的值
-    return a2;
-}
-bool SVM::takeStep(int a1,int a2)
-{
-    if(a1<-eps)
-    {
-        return false;
-    }
-    double x1,x2;
-    x2 = alpha[a2];
-    x1 = alpha[a1];
-    double L,H;
-    double s = label[a1]*label[a2];
-    L = s<0 ? s_max(0,alpha[a2]-alpha[a1]):s_max(0,alpha[a2]+alpha[a1]-C);
-    H = s<0 ? s_min(C,C+alpha[a2]-alpha[a1]):s_min(C,alpha[a2]+alpha[a1]);
-    if(L>=H) return false;
-    double eta = kernel(a1,a1) + kernel(a2,a2) - 2*kernel(a1,a2);
-    if(eta > 0)
-    {
-        alpha[a2] = x2 + label[a2] * (gx[a1] - label[a1] - gx[a2] + label[a2]) / eta; 
-    }
-    else 
-    {
-        alpha[a2] = L;
-        double Lobj = objFun(a2);
-        alpha[a2] = H;
-        double Hobj = objFun(a2);
-        if(Lobj < Hobj - eps)
-        {
-            alpha[a2] = L;
-        }
-        else if (Lobj > Hobj + eps)
-        {
-            alpha[a2] = H;
-        }
-        else 
-        {
-            alpha[a2] = x2;
-        }
-
-    }
+    computeGx();  
+}  
+  
+  
+//选取第二个变量   
+/* 
+先选择是对应E1-E2最大的 
+若没有，用启发式规则，选目标函数有足够下降的alpha2 
+还没有，选择新的alpha1 
+*/  
+int SVM::secondAlpha(int a1)  
+{  
+    //先计算出所有的E，也就是样本xi的预测值与真实输出之差Ei=g(xi)-yi  
+    //若E1为正，选最小的Ei作为E2，反正选最大  
+    bool pos = (gx[a1] - label[a1] > 0);  
+    double tmp = pos ? 100000000 : -100000000;  
+    double ei = 0; int a2 = -1;  
+    for (int i = 0; i < sampleNum; i++)  
+    {  
+        ei = gx[i] - label[i];  
+        if (pos &&  ei < tmp || !pos && ei > tmp)   
+        {  
+            tmp = ei;  
+            a2 = i;  
+        }  
+    }  
+    //对于特殊情况，直接遍历间隔边界上的支持向量点,选择具有最大下降的值  
+    return a2;  
+}  
+  
+//选定a1和a2，进行更新  
+bool SVM::takeStep(int a1, int a2)  
+{  
+    if (a1 < -eps) return false;  
+  
+    double x1, x2;      //old alpha  
+    x2 = alpha[a2];  
+    x1 = alpha[a1];  
+    //计算剪辑的边界  
+    double L, H;  
+    double s = label[a1] * label[a2];//a1 与 a2同号或异号  
+    L = s < 0 ? s_max(0, alpha[a2] - alpha[a1]) : s_max(0, alpha[a2] + alpha[a1] - C);  
+    H = s < 0 ? s_min(C, C + alpha[a2] - alpha[a1]) : s_min(C, alpha[a2] + alpha[a1]);  
+    if (L >= H) return false;  
+    double eta = kernel(a1, a1) + kernel(a2, a2) - 2 * kernel(a1, a2);  
+    //更新alpah[a2]  
+    if (eta > 0)  
+    {  
+        alpha[a2] = x2 + label[a2] * (gx[a1] - label[a1] - gx[a2] + label[a2]) / eta;  
+        if (alpha[a2] < L) alpha[a2] = L;   
+        else if (alpha[a2] > H) alpha[a2] = H;  
+    }  
+    else//我也不知道为什么这么算，我抄的论文里的,意思是选到超平面距离近的边界  
+    {  
+        alpha[a2] = L;  
+        double Lobj = objFun(a2);  
+        alpha[a2] = H;  
+        double Hobj = objFun(a2);  
+        if (Lobj < Hobj - eps)  
+            alpha[a2] = L;  
+        else if (Lobj > Hobj + eps)  
+            alpha[a2] = H;  
+        else  
+            alpha[a2] = x2;  
+    }  
     //下降太少，忽略不计  
     if (fabs(alpha[a2] - x2) < eps*(alpha[a2] + x2 + eps))  
     {  
@@ -204,8 +240,10 @@ bool SVM::takeStep(int a1,int a2)
         cout << gx[ii] << endl; 
     } 
     */  
-    return true; 
-}
+    return true;  
+  
+}  
+  
 //由SVM分类决策的对偶最优化问题求解alpha  
 /* 
 用序列最小最优化算法（SMO）求解alpha 
@@ -375,5 +413,4 @@ void SVM::show()
         if(alpha[i]>eps)  
         cout <<i<<" 对应的alpha为:"<<alpha[i]<< endl;  
     }  
-    cout << endl;  
-}
+}  

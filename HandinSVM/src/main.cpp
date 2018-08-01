@@ -1,4 +1,4 @@
-//#include <svm.h>
+#include <svm.h>
 #include <iostream>
 #include <stdio.h>
 #include <cstdlib>
@@ -47,17 +47,16 @@ int readData(tData data[],tLabel label[],char *datapath)
         comma = line.find(',',0);
         int tmplabel = atof(line.substr(0,comma).c_str());
         label[i] = tmplabel;
-        cout <<"Label is "<< label[i]<<endl;
+        //cout <<"Label is "<< label[i]<<endl;
         while (comma < line.size() && j != fn)
         {
             comma2 = line.find(',',comma + 1);
             double tmpdata = atof(line.substr(comma + 1,comma2-comma-1).c_str());
             data[i*fn+j] = tmpdata;
-            cout<<"data is :"<<data[i*fn+j]<<endl;
+            //cout<<"data is :"<<data[i*fn+j]<<endl;
             ++j;
             comma = comma2;
         }
-        cout<<endl;
         j = 0;
     }
     fin.close();
@@ -84,12 +83,28 @@ int main(int argc,char **argv)
     d = new double[(sn1+sn2)*fn];
     for(i = 0;i<sn1+sn2;i++)
     {
-        if(fabs(label[i] -2) < 1e-3) l[i] = -1;//2 为 -1 类
-        else l[i] = 1;//1 为 1 类
+        if(fabs(label[i] -2) < 1e-3) 
+        {
+            l[i] = -1;//2 为 -1 类
+        }
+        else 
+        {
+            l[i] = 1;//1 为 1 类
+        }
     }
-    for(i=0;j<fn;i++)
+    for(i= 0;i<sn1+sn2;i++)
     {
-        
+        for(j=0;j<fn;j++)
+        {
+            d[i*fn+j] = data[i*fn+j];
+        }
     }
-
+    SVM svm(d, l, sn1+sn2, fn);   
+    svm.SMO();
+    cout << "数据集1和数据集2"<<endl;  
+    svm.show();  
+    delete l;  
+    delete d; 
+    //getchar();
+    return 0;
 }
