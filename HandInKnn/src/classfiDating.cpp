@@ -112,7 +112,6 @@ void KNN:: get_all_distance()
 {
 	double distance;
 	int i;
-    //test_data_num : rowLen 之间顶点数据用于计算(训练)
 	for(i=test_data_num;i<rowLen;i++)
 	{
 		distance = get_distance(dataSet[i],testData);
