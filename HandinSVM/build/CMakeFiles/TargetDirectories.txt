@@ -1,3 +1,0 @@
-/home/mxq/Code/OpenCVLinux/HandinSVM/build/CMakeFiles/rebuild_cache.dir
-/home/mxq/Code/OpenCVLinux/HandinSVM/build/CMakeFiles/SVM.dir
-/home/mxq/Code/OpenCVLinux/HandinSVM/build/CMakeFiles/edit_cache.dir
