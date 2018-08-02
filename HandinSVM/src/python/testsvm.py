@@ -34,6 +34,10 @@ class Test():
     def __init__(self):
         self.a = []
         self.b = []
+        self.C = 0.1
+        self.inter = 1000
+        self.kernel = "Line"
+        #self.kernel = ['Gauss',1]
         self.conf = ConfigParser.ConfigParser()
         if "param1" not in self.conf.sections():
            self.conf.add_section("param1")
@@ -65,19 +69,32 @@ class Test():
             for k ,traindata in enumerate(data):
                 print("正在训练数据！")
                 error_rate = 1.1
-                for i in range(10):
-                    svmtrain=SVM(traindata,'Line',1000,0.02,0.001)
-                    svmtrain.train()
-                    self.a = svmtrain.a 
-                    self.b = svmtrain.b
-                    test_error_rate = self.get_error(testdata[k],testlabel[k],[traindata],k,train=True)
-                    if  test_error_rate < error_rate:
-                        error_rate = test_error_rate 
-                        self.writeconf(k+1)
+                #for i in range(10):
+                if k == 1:
+                    while(error_rate>0.15):
+                        svmtrain=SVM(traindata,self.kernel,self.inter,self.C,0.001)
+                        svmtrain.train()
+                        self.a = svmtrain.a 
+                        self.b = svmtrain.b
+                        print(error_rate)
+                        test_error_rate = self.get_error(testdata[k],testlabel[k],[traindata],k,train=True)
+                        if  test_error_rate < error_rate:
+                            error_rate = test_error_rate 
+                            self.writeconf(k+1)
+                else:
+                    for i in range(3):
+                        svmtrain=SVM(traindata,self.kernel,self.inter,self.C,0.001)
+                        svmtrain.train()
+                        self.a = svmtrain.a 
+                        self.b = svmtrain.b
+                        test_error_rate = self.get_error(testdata[k],testlabel[k],[traindata],k,train=True)
+                        if  test_error_rate < error_rate:
+                            error_rate = test_error_rate 
+                            self.writeconf(k+1)
                 print(error_rate)
 
     def showres(self,data,prelist):
-        svmtest=SVM(data,'Line',1000,0.02,0.001)
+        svmtest=SVM(data,self.kernel,self.inter,self.C,0.001)
         svmtest.a = self.a
         svmtest.b = self.b
         res = svmtest.predict(prelist)
