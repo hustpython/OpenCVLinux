@@ -19,3 +19,13 @@
 修改训练样本
 
 使用高斯核等其他非线性核函数
+
+## 依赖库
+
+python 2.7
+
+numpy
+
+collections
+
+ConfigParser
