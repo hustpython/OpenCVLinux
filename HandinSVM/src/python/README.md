@@ -34,7 +34,7 @@
 使用高斯核等其他非线性核函数
 
 $$
-J(\theta) = \frac 1 2 \sum_{i=1}^m (h_\theta(x^{(i)})-y^{(i)})^2
+k(x,y) = exp(-frac{(x-y)^2}{2*sigma^2})
 $$
 
 ## 依赖库
