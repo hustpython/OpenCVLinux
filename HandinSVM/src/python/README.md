@@ -34,7 +34,11 @@
 使用高斯核等其他非线性核函数
 
 $$
+<<<<<<< HEAD
 k(x,y) = \exp (-\frac{(x-y)^2}{2\sigma^2})
+=======
+k(x,y) = \exp(-\frac{(x-y)^2}{2*\sigma^2})
+>>>>>>> origin/master
 $$
 
 ## 依赖库
