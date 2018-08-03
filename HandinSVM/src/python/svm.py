@@ -37,6 +37,7 @@ class SVM:
 
       def __kernel(self,A,B):
             #核函数 是对输入的向量进行变形 从低维映射到高维度
+            # k(x,y) = exp(- ((x-y)^2/2sigma^2)
             res=0
             if self.kernel=='Line':
                   res=self.__Tdot(A,B)
