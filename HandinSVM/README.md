@@ -9,6 +9,12 @@ alpha
 
 - 编译
 
+依赖库
+
+jsoncpp,scons
+
+(安装方法   : https://blog.csdn.net/tanswer_/article/details/73104931)
+
 mkdir build
 
 cd build
