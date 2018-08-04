@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/SVM.dir/src/main.cpp.o CMakeFiles/SVM.dir/src/svm.cpp.o  -o SVM -ljson 

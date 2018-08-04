@@ -504,6 +504,7 @@ int SVM::predict(double testdata[])
         }
         pre_value += alpha[i]*label[i] * kernelres;
     }
+    pre_value += b;
     if(pre_value<0)
     {
         y = -1;

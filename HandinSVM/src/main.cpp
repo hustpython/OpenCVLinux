@@ -169,7 +169,7 @@ int main(int argc,char **argv)
         testlabel[i] = int(label[i]);
     }
     //int cumputed01[sn];
-    int errorcount = 0;
+    int errorcount = sn;
     for(int i=0;i<sn1;i++)
     {
         svm1.loadparams(1);
@@ -178,15 +178,11 @@ int main(int argc,char **argv)
         int res2 = svm2.predict(testdata[i]);
         svm3.loadparams(3);
         int res3 = svm3.predict(testdata[i]);
-        // cout<<res1<<endl;
-        // cout<<res2<<endl;
-        // cout<<res3<<endl;
-        if(res1!=1)
+        if(res1==1 && res3==-1)
         {
-            errorcount ++;
+            errorcount --;
         } 
     }
-    cout<<errorcount<<endl;
     for(int i=sn1;i<sn1+sn2;i++)
     {
         svm1.loadparams(1);
@@ -195,12 +191,9 @@ int main(int argc,char **argv)
         int res2 = svm2.predict(testdata[i]);
         svm3.loadparams(3);
         int res3 = svm3.predict(testdata[i]);
-        cout<<res1<<endl;
-        cout<<res2<<"s"<<endl;
-        cout<<res3<<endl;
-        if(res2!=1)
+        if(res2==1 && res1==-1)
         {
-            errorcount ++;
+            errorcount --;
         } 
     }
     for(int i=sn1+sn2;i<sn;i++)
@@ -211,11 +204,9 @@ int main(int argc,char **argv)
         int res2 = svm2.predict(testdata[i]);
         svm3.loadparams(3);
         int res3 = svm3.predict(testdata[i]);
-        //cout<<res3<<endl;
-        //cout<<"12:"<<res1<<","<<"23:"<<res2<<","<<"31:"<<res3<<endl;
-        if(res3!=1)
+        if(res3==1 && res2 == -1)
         {
-            errorcount ++;
+            errorcount --;
         } 
     }
     cout<<errorcount<<endl;
