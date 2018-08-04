@@ -13,7 +13,7 @@ private:
     int featureNum; //特征数  
     double **data;  //存放样本 行：样本， 列：特征  
     double *label;      //存放类标  
-    double *alpha;  
+    double *alpha; 
     //double *w;   对于非线性问题，涉及kernel,不方便算  
     double b;  
     double *gx;  
@@ -35,4 +35,7 @@ public:
     void SMO();  
     double objFun(int);  
     void show();  
+    void saveparams(int k);
+    void loadparams(int l);
+    int predict(double testdata[]);
 }; 

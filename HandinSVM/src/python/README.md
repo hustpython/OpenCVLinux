@@ -37,6 +37,14 @@ $$
 k(x,y) = \exp (-\frac{(x-y)^2}{2\sigma^2})
 $$
 
+$$
+w^* = \sum_{i=1}^{n}\alpha_i^{*}y_i\phi(x_i)
+$$
+
+$$
+b^* = y_i - \sum_{i=1}^{n}\alpha_iy_i[\phi(x_i)\phi(x_j)]
+$$
+
 ## 依赖库
 
 python 2.7

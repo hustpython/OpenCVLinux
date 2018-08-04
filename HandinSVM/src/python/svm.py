@@ -28,8 +28,9 @@ class SVM:
             self.eCache=[[0,0] for i in range(len(self.trainData))]
             self.b=0
             self.xL=[self.trainData[i][0] for i in range(len(self.trainData))]
+            # sampledata [[,,,],[,,,],[,,,]]
             self.yL=[self.trainData[i][1] for i in range(len(self.trainData))]
-
+            # samplelabel [1,1,1,-1,-1,-1]
       def train(self):
             #support_Vector=self.__SMO()
             self.__SMO()
@@ -37,7 +38,7 @@ class SVM:
 
       def __kernel(self,A,B):
             #核函数 是对输入的向量进行变形 从低维映射到高维度
-            # k(x,y) = exp(- ((x-y)^2/2sigma^2)
+            # k(x,y) = exp(-((x-y)^2/2sigma^2))
             res=0
             if self.kernel=='Line':
                   res=self.__Tdot(A,B)
@@ -50,6 +51,7 @@ class SVM:
 
 
       def __Tdot(self,A,B):
+            # 内积求和
             res=0
             for k in range(len(A)):
                   res+=A[k]*B[k]
@@ -60,7 +62,9 @@ class SVM:
             #SMO是基于 KKT 条件的迭代求解最优化问题算法
             #SMO是SVM的核心算法
             support_Vector=[]
+            # 初始化 a 长度为sampledata的个数
             self.a=[0 for i in range(len(self.trainData))]
+            # pre_a 副本
             pre_a=copy.deepcopy(self.a)
             for it in range(self.maxIter):
                   flag=1
@@ -148,6 +152,7 @@ class SVM:
 
       def __calW(self):
             self.w=[0 for i in range(len(self.trainData[0][0]))]
+            # self.w 长度为x特征值个数(13)
             for i in range(len(self.trainData)):
                   for j in range(len(self.w)):
                         self.w[j]+=self.a[i]*self.yL[i]*self.xL[i][j]

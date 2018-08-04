@@ -1,5 +1,9 @@
 #include "svm.h"  
 #include <math.h>  
+#include <fstream>
+#include <sstream>
+#include <assert.h>
+#include <json/json.h>
 using namespace std;  
   
 #define eps 1e-2    //误差精度  
@@ -8,7 +12,7 @@ const int C = 100;  //惩罚参数
 SVM::~SVM()  
 {  
     if (data) delete[]data;  
-    if (label) delete []label;  
+    if (label) delete label; 
     if (alpha) delete alpha;  
     if (gx) delete gx;  
 }  
@@ -404,13 +408,110 @@ void SVM::SMO()
   
     delete eligSample;  
 }  
-  
+// todo
+void SVM::saveparams(int k)
+{
+    cout<<"正在保存alpha"<<k<<endl;
+    ofstream fout;
+    ifstream fin;
+    char filepath[] = "alphab.json";
+    fin.open(filepath);
+    //assert(fout.is_open());
+    // if(!fout)
+    // {
+    //     cout << "can not open the passing data"<<endl;
+    //     exit(1);
+    // }
+    Json::Value jsonalpha;
+    Json::Value jsonb;
+    Json::Value jsonItem;
+    Json::Reader reader;
+
+    if(reader.parse(fin,jsonItem))
+    {
+        for(int i=0;i<sampleNum;i++)
+        {
+            jsonalpha[i] = alpha[i];
+        }
+        stringstream ssalpha;
+        stringstream ssb;
+        char ca = 'a';
+        char cb = 'b';
+        ssalpha << ca << k;
+        ssb << cb << k;
+        jsonItem[ssalpha.str()] = jsonalpha;
+        jsonb = b;
+        jsonItem[ssb.str()] = jsonb.asDouble();
+        fin.close();
+    }
+    fout.open(filepath);
+	fout << jsonItem.toStyledString();
+    fout.close();
+}
+void SVM::loadparams(int m)
+{
+    //cout << "正在读取参数文件" << endl;
+    ifstream fin;
+    char filepath[] = "alphab.json";
+    fin.open(filepath);
+    //assert(fin.is_open());
+    if(!fin)
+    {
+        cout << "can not open the passing data"<<endl;
+        exit(1);
+    }
+    Json::Reader reader;
+    Json::Value val;
+    stringstream ssalpha;
+    stringstream ssb;
+    char ca = 'a';
+    char cb = 'b';
+    ssalpha << ca << m;
+    ssb << cb << m;
+    if(!reader.parse(fin,val))
+    {
+        exit(1);
+    }
+    //cout << val[ssalpha.str()]<<endl;
+    for(int j=0;j<sampleNum;j++)
+    {
+        alpha[j] = val[ssalpha.str()][j].asDouble();
+    }
+    b = val[ssb.str()].asDouble();
+}
 void SVM::show()  
 {  
     cout << "支持向量为:" << endl;  
     for (int i = 0; i < sampleNum; i++)  
     {  
-        if(alpha[i]>eps)  
+        //if(alpha[i]>eps)  
         cout <<i<<" 对应的alpha为:"<<alpha[i]<< endl;  
     }  
+    cout<< "对应的b为:"<<b<<endl;
 }  
+int SVM::predict(double testdata[])
+{
+    int pre_value = 0;
+    int y;
+    int i,k;
+    for(i=0;i<sampleNum;i++)
+    {
+         
+        double kernelres = 0.0;
+        for(k=0;k<featureNum;k++)
+        {
+            kernelres += data[i][k]*testdata[k];
+        }
+        pre_value += alpha[i]*label[i] * kernelres;
+    }
+    if(pre_value<0)
+    {
+        y = -1;
+    }
+    else
+    {
+        y = 1;
+    }
+    //cout << "testdata belong to:"<<y<<endl;
+    return y;
+}

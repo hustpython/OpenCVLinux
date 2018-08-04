@@ -5,4 +5,5 @@ set(src src/main.cpp
         src/svm.cpp)
 INCLUDE_DIRECTORIES(include)
 add_executable(${PROJECT_NAME} ${src})
+target_link_libraries(${PROJECT_NAME} json)
 

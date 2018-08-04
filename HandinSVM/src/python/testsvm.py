@@ -146,7 +146,7 @@ if __name__ == '__main__':
     traindata = [data12,data23,data31]
     testdatalist = [testdata[:sn1+sn2],testdata[sn1:],testdata[:sn1]+testdata[sn1+sn2:]]
     testdatalabellist = [testdatalabel[:sn1+sn2],testdatalabel[sn1:],testdatalabel[:sn1]+testdatalabel[sn1+sn2:]]
-    testclass.train(traindata,testdatalist,testdatalabellist)
+    #testclass.train(traindata,testdatalist,testdatalabellist)
     threeclass_rate = testclass.get_error(testdata,testdatalabel,traindata,-1)
     print(1-threeclass_rate)
     #prelist = [14.13, 4.1, 2.74, 24.5, 96.0, 2.05, 0.76, 0.56, 1.35, 9.2, 0.61, 1.6, 560.0] # 1类
