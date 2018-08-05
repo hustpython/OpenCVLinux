@@ -26,3 +26,9 @@ make
 - 运行
 
 ./SVM ../resource/wine.mat
+
+## 其他
+
+[python 代码实现](src/python/)
+
+[libsvm 代码实现](src/libsvmtest/)
