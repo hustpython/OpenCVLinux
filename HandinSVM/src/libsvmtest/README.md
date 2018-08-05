@@ -43,6 +43,19 @@ svm-scale -s train.range tarin1 > train1.scaled
 ```shell
 svm-train 训练数据文件
 ```
+可以制定核函数
+```
+-t kernel_type : set type of kernel function (default 2)
+        0 -- linear: u'*v
+        1 -- polynomial: (gamma*u'*v + coef0)^degree
+        2 -- radial basis function: exp(-gamma*|u-v|^2)
+        3 -- sigmoid: tanh(gamma*u'*v + coef0)
+        4 -- precomputed kernel (kernel values in training_instance_matrix指定核矩阵)
+```
+例子(线性核):
+```
+./svm-train -t 0  libsvmwine23
+```
 输出 inpudatafile.model 
 
 ## svm-predict
