@@ -35,6 +35,7 @@ def py_nms(dets, thresh):
         #找到重叠度不高于阈值的矩形框索引
         inds = np.where(ovr <= thresh)[0]
         #将order序列更新，由于前面得到的矩形框索引要比矩形框在原order序列中的索引小1，所以要把这个1加回来
+        #inds = [1,2,3]或[];order[inds + 1] = order[[2,3,4]] = [x,x,x] 或 order[[]] = []
         order = order[inds + 1]
     return keep
 
@@ -65,7 +66,7 @@ def prepareproposal(path):
         cv.rectangle(imgmultiproposals,(rec[0],rec[1]), (rec[2],rec[3]),(0,0,255)) 
     cv.imshow("before",imgmultiproposals)
 
-    keepindex = py_nms(proposals,0.1)
+    keepindex = py_nms(proposals,0.5)
     imgnms = img.copy()
     for i in keepindex:
         rec = proposals[i]
