@@ -27,13 +27,11 @@ $$
 out_{h2} = \frac{1}{1+e^{-net_{h2}}}
 $$
 隐含层 -> 输出层
-$$
-net_{o1} = w_5 \times out_{h1}+w_6 \times out_{h2}+b_2
 
 $$
+net_{o1} = w_5 \times out_{h1}+w_6 \times out_{h2}+b_2$$
 
 $$net_{o2} = w_7 \times out_{h1}+w_8 \times out_{h2}+b_2$$
-
 $$
 out_{1} = \frac{1}{1+e^{-net_{o1}}}
 $$
