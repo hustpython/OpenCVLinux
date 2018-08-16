@@ -12,11 +12,11 @@
 输出层 -> 隐藏层
 
 $$
-net_{h1} = w_1*i_1 + w_2*i_2+b_1
+net_{h1} = w_1 \times i_1 + w_2 \times i_2+b_1
 $$
 
 $$
-net_{h2} = w_3*i_1 + w_4*i_2+b_1
+net_{h2} = w_3 \times i_1 + w_4 \times i_2+b_1
 $$
 
 $$
@@ -28,11 +28,11 @@ out_{h2} = \frac{1}{1+e^{-net_{h2}}}
 $$
 隐含层 -> 输出层
 $$
-net_{o1} = w_5*out_{h1}+w_6*out_{h2}+b_2
+net_{o1} = w_5 \times out_{h1}+w_6 \times out_{h2}+b_2
 
 $$
 
-$$net_{o2} = w_7*out_{h1}+w_8*out_{h2}+b_2$$
+$$net_{o2} = w_7 \times out_{h1}+w_8 \times out_{h2}+b_2$$
 
 $$
 out_{1} = \frac{1}{1+e^{-net_{o1}}}
@@ -53,18 +53,18 @@ $$
 
 以$w_5$为例,如果我们想知道$w_5$对整体误差产生了多少影响,可以利用整体误差对$w_5$求偏导(链式法则)
 
- $$\frac{\alpha{E_{total}}}{\alpha{w_5}} = \frac{\alpha{E_{total}}}{\alpha{out_1}}*\frac{\alpha{out_1}}{\alpha{net_{o1}}}*\frac{\alpha{neto_1}}{\alpha{w_5}}$$
+ $$\frac{\alpha{E_{total}}}{\alpha{w_5}} = \frac{\alpha{E_{total}}}{\alpha{out_1}} \times \frac{\alpha{out_1}}{\alpha{net_{o1}}} \times \frac{\alpha{neto_1}}{\alpha{w_5}}$$
 
-$$E_{total} = \frac{1}{2}*[(targeto_1-out_1)^2+(targeto_2-out_2)^2]$$
+$$E_{total} = \frac{1}{2} \times [(targeto_1-out_1)^2+(targeto_2-out_2)^2]$$
 
 - $$\frac{\alpha{E_{total}}}{\alpha{out_1}} = -(targeto_1 - out_1)$$
 - $$\frac{\alpha{out_1}}{\alpha{net_{o1}}} = \frac{\alpha{\frac{1}{1+e^-net_{o1}}}}{\alpha{net_{o1}}}=out_1(1-out_1)$$
 - $$\frac{\alpha{net_{o1}}}{\alpha{w_5}}=out_{h1}$$
 三者相乘
-令$\delta_{o1}=-(traget_{o1}-out_1)*out_1(1-out_1)$
+令$\delta_{o1}=-(traget_{o1}-out_1) \times out_1(1-out_1)$
 则
 $$\frac{\alpha{E_{total}}}{\alpha{w_5}} = \delta_{o1}out_{h1}$$
-更新权重$w_5 = w_5 - \eta*\frac{\alpha{E_{total}}}{\alpha{w_5}}$
+更新权重$w_5 = w_5 - \eta \times \frac{\alpha{E_{total}}}{\alpha{w_5}}$
 
 同理可以更新隐藏层->输出层的其他权重值
 
